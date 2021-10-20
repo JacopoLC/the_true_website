@@ -74,21 +74,22 @@ funfacts:
   enable: true
   funfacts_list:
     - name: 'LANGUAGES SPOKEN'
-      image: 'images/icons/coffee.png'
+      image: 'images/icons/language.png'
       count: '4'
 
+    - name: 'SPORTS PLAYED'
+      image: 'images/icons/sports.png'
+      count: '8'
+      
     - name: 'SITES BUILT'
-      image: 'images/icons/web-development.png'
-      count: '25'
-
-    - name: 'USELESS ROW OF ICONS'
-      image: 'images/icons/happy.png'
+      image: 'images/icons/seo.png'
       count: '1'
+
 
 ############################# portfolio ################################
 portfolio:
   enable: true
-  title: 'MY WORK'
+  title: 'PROJECTS'
   portfolio_list:
     - name: Hugo
       image: 'images/portfolio/hugo.png'

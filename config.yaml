@@ -1,4 +1,4 @@
-baseURL: https://example.com
+baseURL: https://jacopolc-website.netlify.app/
 title: Jacopo's website
 theme: port-hugo
 params:
