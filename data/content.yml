@@ -23,7 +23,7 @@ about:
   button:
     enable: true
     label: 'DOWNLOAD MY RESUME'
-    pdf: 'pdf/CV Jacopo Lorusso Caputi.pdf'
+    url: 'pdf/CV Jacopo Lorusso Caputi.pdf'
     icon: 'fa-download'
 
 ###########################3 Experience ##############################
