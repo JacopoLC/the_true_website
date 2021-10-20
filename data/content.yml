@@ -73,9 +73,9 @@ skill:
 funfacts:
   enable: true
   funfacts_list:
-    - name: 'CUPS PER DAY'
+    - name: 'LANGUAGES SPOKEN'
       image: 'images/icons/coffee.png'
-      count: '2'
+      count: '4'
 
     - name: 'SITES BUILT'
       image: 'images/icons/web-development.png'

@@ -1,5 +1,5 @@
 baseURL: https://example.com
-title: Port Hugo
+title: Jacopo's website
 theme: port-hugo
 params:
   author: Jacopo Lorusso Caputi
@@ -46,5 +46,5 @@ menu:
       name: About me
       weight: 2
     - URL: '#portfolio'
-      name: Portfolio
+      name: Projects
       weight: 3
