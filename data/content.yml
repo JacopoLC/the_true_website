@@ -96,10 +96,10 @@ portfolio:
       url: blogs/HW_1
       description: In this code, we first plotted the distribution of movie ratings across al genres. Then we looked at possible relationships between the gross profits of the movies with cast facebook likes, budget and rating.
 
-    - name: Excess rentals in TfL bike sharing
-      image: 'images/portfolio/TFL.jpg'
-      url: 
-      description: We used facet grid to plot the distributions of bikes hired by month and year. After we replicated the two graphs given. Comparing expected rentals with actual ones of the 5 years.
+    # - name: Excess rentals in TfL bike sharing
+    #   image: 'images/portfolio/TFL.jpg'
+    #   url: 
+    #   description: We used facet grid to plot the distributions of bikes hired by month and year. After we replicated the two graphs given. Comparing expected rentals with actual ones of the 5 years.
 
    - name: Just A Design
       image: 'images/portfolio/design.png'
