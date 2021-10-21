@@ -44,7 +44,7 @@ experience:
     - name: Bachelor of Science in Economics and Finance 
       company: Bocconi University
       duration: '2018-2021'
-      content: Best Uni in Italyù
+      content: Best Uni in Italy
       
     - name: Asset Management Summer Intern 
       company: Decalia AM
@@ -98,7 +98,7 @@ portfolio:
 
     - name: Excess rentals in TfL bike sharing
       image: 'images/portfolio/TFL.jpg'
-      url: blogs/HW_2
+      url: 
       description: We used facet grid to plot the distributions of bikes hired by month and year. After we replicated the two graphs given. Comparing expected rentals with actual ones of the 5 years.
 
    - name: Just A Design
