@@ -45,6 +45,6 @@ menu:
     - URL: '#about'
       name: About me
       weight: 2
-    - URL: '#projects'
+    - URL: '#portfolio'
       name: Projects
       weight: 3
