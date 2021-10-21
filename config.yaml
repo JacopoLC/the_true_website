@@ -27,15 +27,11 @@ params:
     preloader: images/preloader.gif
   social:
     - icon: fab fa-github
-      link: https://github.com/tylerjlawson
+      link: https://github.com/JacopoLC
     - icon: fab fa-linkedin
-      link: https://www.linkedin.com/
+      link: https://www.linkedin.com/in/jacopo-lorusso-caputi/
     - icon: fas fa-envelope
-      link: mailto:guster@burton.com
-    - contentDir: content/english
-      home: Home
-      icon: fab fa-medium
-      link: https://medium.com/@gusburton
+      link: mailto:jacopol.mfa2022@london.edu
       weight: 1
 menu:
   main:

@@ -258,7 +258,7 @@ omega %>%
   ggpairs(aes(colour=gender, alpha = 0.3))+
   theme_bw()
 ```
-```{r}
+```{r, class.source="watch-out", class.output="watch-out"}
 cor(omega$salary, omega$experience)
 ```
 
