@@ -92,13 +92,14 @@ portfolio:
     - name: Analysis of movies - IMDB dataset
       image: 'images/portfolio/cinema.jpg'
       url: blogs/HW_1
+      description: In this code, my group and I plotted first the distribution of movie ratings across genres. Then we studied the relationship between gross profits and cast Facebook likes, budget spent and ratings.
 
     - name: Excess rentals in TfL bike sharing
       image: 'images/portfolio/TFL.jpg'
       url: blogs/HW_2
-      description: non mollit commodo esse. Quis ad Lorem eiusmod ad velit Lorem sint elit. Anim magna duis et duis pariatur eiusmod laboris esse. Sit duis labore sit esse enim laborum nisi sunt magna sint labore tempor. Sit sit sint eu laboris officia et sunt consequat sit excepteur nostrud eu. Fugiat aliqua id et pariatur quis commodo aute aliqua et magna officia eu cillum mollit. Sint culpa excepteur culpa culpa sint est eu dolore culpa duis adipisicing proident.
+      description: We used facet grid to view the distrbution of bikes hired by month and year. After, we recreated the two graphs given in order to visually see the difference between expected rentals with actual one in the last five years.
 
     - name: Omega Group plc - Pay Discrimination
       image: 'images/portfolio/women.jpg'
       url: blogs/HW_3
-      description: Commodo non mollit commodo esse. Quis ad Lorem eiusmod ad velit Lorem sint elit. Anim magna duis et duis pariatur eiusmod laboris esse. Sit duis labore sit esse enim laborum nisi sunt magna sint labore tempor. Sit sit sint eu laboris officia et sunt consequat sit excepteur nostrud eu. Fugiat aliqua id et pariatur quis commodo aute aliqua et magna officia eu cillum mollit. Sint culpa excepteur culpa culpa sint est eu dolore culpa duis adipisicing proident.
+      description: The objective of this project is to conclude wether there is indeed a significant difference between the salaries of men and women. At the end we analyzed if experience is a good predictor of salaries.
