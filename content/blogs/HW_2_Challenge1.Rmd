@@ -11,7 +11,17 @@ categories:
 - ''
 ---
 
-```{r, setup, include=FALSE}
+```{css, echo=FALSE}
+.watch-out {
+  background-color: lightgrey;
+  border: 2px solid black;
+  color: white;
+  font-weight: bold
+}
+```
+
+
+```{r, setup, include=FALSE, class.source="watch-out", class.output="watch-out"}
 knitr::opts_chunk$set(
   message = FALSE, 
   warning = FALSE, 
@@ -28,7 +38,7 @@ knitr::opts_chunk$set(
 ```
 
 
-```{r load-libraries, include=FALSE}
+```{r load-libraries, include=FALSE, class.source="watch-out", class.output="watch-out"}
 
 library(ggtext)
 library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
@@ -52,7 +62,7 @@ library(kableExtra)
 # Challenge 1: Excess rentals in TfL bike sharing
 
 Recall the TfL data on how many bikes were hired every single day. We can get the latest data by running the following codes:
-```{r, get_tfl_data, cache=TRUE}
+```{r, get_tfl_data, cache=TRUE, class.source="watch-out", class.output="watch-out"}
 url <- "https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx"
 
 # Download TFL data to temporary file
@@ -74,7 +84,7 @@ bike <- bike0 %>%
 
 
 We can easily create a facet grid that plots bikes hired by month and year.
-```{r tfl_month_year_grid, echo=FALSE, out.width="100%"}
+```{r tfl_month_year_grid, echo=FALSE, out.width="100%", class.source="watch-out", class.output="watch-out"}
 knitr::include_graphics(here::here("content/images", "tfl_distributions_monthly.png"))
 ```
 
@@ -84,13 +94,13 @@ The distributions of bikes hired per month during May and Jun in 2020 is flatter
 We then start to reproduce the following two graphs: 
 
 1. Monthly changes in TFL bike rentals between 2016 and 2019
-```{r tfl_absolute_monthly_change, echo=FALSE, out.width="100%"}
+```{r tfl_absolute_monthly_change, echo=FALSE, out.width="100%", class.source="watch-out", class.output="watch-out"}
 knitr::include_graphics(here::here("content/images", "tfl_monthly.png"))
 ```
 
 2. TFL bike rentals' weekly percentage changes from the expected rentals between 2016 and 2019.
 The two grey shaded rectangles correspond to Q2 (weeks 14-26) and Q4 (weeks 40-52).
-```{r tfl_percent_change, echo=FALSE, out.width="100%"}
+```{r tfl_percent_change, echo=FALSE, out.width="100%", class.source="watch-out", class.output="watch-out"}
 knitr::include_graphics(here::here("content/images", "tfl_weekly.png"))
 ```
 
@@ -108,7 +118,7 @@ Additionally, we uses these links as references when creating plots:
 
 We first calculate the mean of monthly number of bicycles hired between 2016 and 2019, and then get the monthly changes in TFL bike rentals using excess_rental method. We set "up" for the positive excess rental (when monthly actual_rentals is greater than expected_rentals), and "down" for the negative excess rental (when monthly actual_rentals is less than expected_rentals).
 
-```{r monthly bike rental change, out.width="100%"}
+```{r monthly bike rental change, out.width="100%", class.source="watch-out", class.output="watch-out"}
 bike_month_16_19 <- bike %>%
   filter(year>=2016&year<=2019)%>%
   group_by(month) %>%
@@ -129,7 +139,7 @@ bike_month_comp <- merge(bike_month,bike_month_16_19,by="month") %>%
 
 Then we use geom_line and geom_ribbon to generate the lines for expected rental. The green area represents the rental changes where the actual monthly number of bicycles hired is greater than the expected rental, and the red area appears when the actual monthly number of bicycles hired is less than the expected rental. The plots of monthly changes in Tfl bike rentals between 2016 and 2019 are illustrated below:
 
-```{r plot monthly bike rental change, out.width="100%",fig.width=15, fig.height=9}
+```{r plot monthly bike rental change, out.width="100%",fig.width=15, fig.height=9, class.source="watch-out", class.output="watch-out"}
 ggplot(bike_month_comp,aes(month))+
   geom_line(aes(x=month,y=expected_rental,colour="Expected",group=year),size=1)+
   geom_line(aes(x=month,y=bike_hired_month,colour="Actual",group=year))+
@@ -160,7 +170,7 @@ ggplot(bike_month_comp,aes(month))+
 
 We then calculate the mean of weekly number of bicycles hired, and the weekly percentage change between actual and expected bike rentals between 2016 and 2019. We set "up" for the positive percentage change (when weekly actual_rentals is greater than expected_rentals), and "down" for the negative percentage change (when weekly actual_rentals is less than expected_rentals).
 
-```{r weekly bike rental change, out.width="100%"}
+```{r weekly bike rental change, out.width="100%", class.source="watch-out", class.output="watch-out"}
 glimpse(bike)
 bike_week_16_19 <- bike %>%
   filter(year>=2016&year<=2019)%>%
@@ -182,7 +192,7 @@ bike_week_comp <- merge(bike_week,bike_week_16_19,by="week") %>%
 ```
 
 The two grey shaded rectangles correspond to Q2 (weeks 14-26) and Q4 (weeks 40-52) are also added.
-```{r plot weekly bike rental change, out.width="100%",fig.width=15, fig.height=12}
+```{r plot weekly bike rental change, out.width="100%",fig.width=15, fig.height=12, class.source="watch-out", class.output="watch-out"}
 ggplot(bike_week_comp,aes(week))+
   geom_rect(aes(xmin=14,xmax=26,ymin=-0.8,ymax=1.1,group=year),colour="grey",alpha=0.002)+ #plot rectangles for Q2 
   geom_rect(aes(xmin=40,xmax=52,ymin=-0.8,ymax=1.1,group=year),colour="grey",alpha=0.002)+ #plot rectangles for Q4

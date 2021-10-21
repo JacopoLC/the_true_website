@@ -14,20 +14,28 @@ categories:
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
+<style type="text/css">
+.watch-out {
+  background-color: lightgrey;
+  border: 2px solid black;
+  color: white;
+  font-weight: bold
+}
+</style>
 <div id="challenge-1-excess-rentals-in-tfl-bike-sharing" class="section level1">
 <h1>Challenge 1: Excess rentals in TfL bike sharing</h1>
 <p>Recall the TfL data on how many bikes were hired every single day. We can get the latest data by running the following codes:</p>
-<pre class="r"><code>url &lt;- &quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&quot;
+<pre class="r watch-out"><code>url &lt;- &quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&quot;
 
 # Download TFL data to temporary file
 httr::GET(url, write_disk(bike.temp &lt;- tempfile(fileext = &quot;.xlsx&quot;)))</code></pre>
-<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2021-09-23T12%3A52%3A20/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20211021%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20211021T195233Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=e536868eb157a14190baf44d6efc82cfcedd8f514b04cd50102324ed61d9b840&amp;X-Amz-SignedHeaders=host]
-##   Date: 2021-10-21 19:57
+<pre class="watch-out"><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2021-09-23T12%3A52%3A20/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20211021%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20211021T203207Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=881ea8ac50af6a0093b6c2555dc6674a77e24b27f840d5b7894e15bbcf37d34c&amp;X-Amz-SignedHeaders=host]
+##   Date: 2021-10-21 20:34
 ##   Status: 200
 ##   Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 ##   Size: 174 kB
-## &lt;ON DISK&gt;  C:\Users\copo9\AppData\Local\Temp\Rtmp0QvwPu\file491432526052.xlsx</code></pre>
-<pre class="r"><code># Use read_excel to read it as dataframe
+## &lt;ON DISK&gt;  C:\Users\copo9\AppData\Local\Temp\RtmpKU7t4J\file2fbc28664a5d.xlsx</code></pre>
+<pre class="r watch-out"><code># Use read_excel to read it as dataframe
 bike0 &lt;- read_excel(bike.temp,
                    sheet = &quot;Data&quot;,
                    range = cell_cols(&quot;A:B&quot;))
@@ -59,7 +67,7 @@ The two grey shaded rectangles correspond to Q2 (weeks 14-26) and Q4 (weeks 40-5
 <li><a href="https://ggplot2.tidyverse.org/reference/geom_rug.html" class="uri">https://ggplot2.tidyverse.org/reference/geom_rug.html</a></li>
 </ul>
 <p>We first calculate the mean of monthly number of bicycles hired between 2016 and 2019, and then get the monthly changes in TFL bike rentals using excess_rental method. We set “up” for the positive excess rental (when monthly actual_rentals is greater than expected_rentals), and “down” for the negative excess rental (when monthly actual_rentals is less than expected_rentals).</p>
-<pre class="r"><code>bike_month_16_19 &lt;- bike %&gt;%
+<pre class="r watch-out"><code>bike_month_16_19 &lt;- bike %&gt;%
   filter(year&gt;=2016&amp;year&lt;=2019)%&gt;%
   group_by(month) %&gt;%
   summarise(expected_rental=mean(bikes_hired))
@@ -75,7 +83,7 @@ bike_month_comp &lt;- merge(bike_month,bike_month_16_19,by=&quot;month&quot;) %&
          up = ifelse(bike_hired_month&gt;expected_rental, excess_rentals, 0), #up gives the diffrence between actual and expected rentals when actual&gt;expected
          down = ifelse(bike_hired_month&lt;expected_rental, excess_rentals, 0)) #down gives the diffrence between actual and expected rentals when actual&lt;expected</code></pre>
 <p>Then we use geom_line and geom_ribbon to generate the lines for expected rental. The green area represents the rental changes where the actual monthly number of bicycles hired is greater than the expected rental, and the red area appears when the actual monthly number of bicycles hired is less than the expected rental. The plots of monthly changes in Tfl bike rentals between 2016 and 2019 are illustrated below:</p>
-<pre class="r"><code>ggplot(bike_month_comp,aes(month))+
+<pre class="r watch-out"><code>ggplot(bike_month_comp,aes(month))+
   geom_line(aes(x=month,y=expected_rental,colour=&quot;Expected&quot;,group=year),size=1)+
   geom_line(aes(x=month,y=bike_hired_month,colour=&quot;Actual&quot;,group=year))+
   geom_ribbon(aes(ymin=expected_rental,
@@ -101,15 +109,15 @@ bike_month_comp &lt;- merge(bike_month,bike_month_16_19,by=&quot;month&quot;) %&
        x=&quot;Month&quot;, y=&quot;Bike Rentals&quot;) </code></pre>
 <p><img src="/blogs/HW_2_Challenge1_files/figure-html/plot%20monthly%20bike%20rental%20change-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>We then calculate the mean of weekly number of bicycles hired, and the weekly percentage change between actual and expected bike rentals between 2016 and 2019. We set “up” for the positive percentage change (when weekly actual_rentals is greater than expected_rentals), and “down” for the negative percentage change (when weekly actual_rentals is less than expected_rentals).</p>
-<pre class="r"><code>glimpse(bike)</code></pre>
-<pre><code>## Rows: 4,051
+<pre class="r watch-out"><code>glimpse(bike)</code></pre>
+<pre class="watch-out"><code>## Rows: 4,051
 ## Columns: 5
 ## $ day         &lt;dttm&gt; 2010-07-30, 2010-07-31, 2010-08-01, 2010-08-02, 2010-08-0~
 ## $ bikes_hired &lt;dbl&gt; 6897, 5564, 4303, 6642, 7966, 7893, 8724, 9797, 6631, 7864~
 ## $ year        &lt;dbl&gt; 2010, 2010, 2010, 2010, 2010, 2010, 2010, 2010, 2010, 2010~
 ## $ month       &lt;ord&gt; Jul, Jul, Aug, Aug, Aug, Aug, Aug, Aug, Aug, Aug, Aug, Aug~
 ## $ week        &lt;dbl&gt; 30, 30, 30, 31, 31, 31, 31, 31, 31, 31, 32, 32, 32, 32, 32~</code></pre>
-<pre class="r"><code>bike_week_16_19 &lt;- bike %&gt;%
+<pre class="r watch-out"><code>bike_week_16_19 &lt;- bike %&gt;%
   filter(year&gt;=2016&amp;year&lt;=2019)%&gt;%
   group_by(week) %&gt;%
   summarise(expected_rental=mean(bikes_hired))
@@ -126,7 +134,7 @@ bike_week_comp &lt;- merge(bike_week,bike_week_16_19,by=&quot;week&quot;) %&gt;%
          up = ifelse(bike_hired_week&gt;expected_rental, percentage_rentals_change, 0), #up gives the percentage diffrence between actual and expected rentals when actual&gt;expected
          down = ifelse(bike_hired_week&lt;expected_rental, percentage_rentals_change, 0)) #down gives the percentage diffrence between actual and expected rentals when actual&lt;expected</code></pre>
 <p>The two grey shaded rectangles correspond to Q2 (weeks 14-26) and Q4 (weeks 40-52) are also added.</p>
-<pre class="r"><code>ggplot(bike_week_comp,aes(week))+
+<pre class="r watch-out"><code>ggplot(bike_week_comp,aes(week))+
   geom_rect(aes(xmin=14,xmax=26,ymin=-0.8,ymax=1.1,group=year),colour=&quot;grey&quot;,alpha=0.002)+ #plot rectangles for Q2 
   geom_rect(aes(xmin=40,xmax=52,ymin=-0.8,ymax=1.1,group=year),colour=&quot;grey&quot;,alpha=0.002)+ #plot rectangles for Q4
   geom_rug(aes(colour=ifelse(bike_hired_week&gt;=expected_rental,&quot;&gt;=0&quot;,&quot;&lt;0&quot;)),sides=&quot;b&quot;)+ #plot rug for x asis
