@@ -11,8 +11,17 @@ categories:
 - ''
 ---
 
+```{css, echo=FALSE}
+.watch-out {
+  background-color: lightgrey;
+  border: 2px solid black;
+  color: white;
+  font-weight: bold
+}
+```
 
-```{r, setup, echo=FALSE}
+
+```{r, setup, echo=FALSE, class.source="watch-out", class.output="watch-out"}
 knitr::opts_chunk$set(
   message = FALSE, 
   warning = FALSE, 
@@ -29,7 +38,7 @@ knitr::opts_chunk$set(
 ```
 
 
-```{r load-libraries, echo=FALSE}
+```{r load-libraries, echo=FALSE, class.source="watch-out", class.output="watch-out"}
 library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
 library(mosaic)
 library(ggthemes)
@@ -55,7 +64,7 @@ You are asked to carry out the analysis. The objective is to find out whether th
 ## Loading the data
 
 
-```{r load_omega_data}
+```{r load_omega_data, class.source="watch-out", class.output="watch-out"}
 omega <- read_csv(here::here("content/data", "omega.csv"))
 glimpse(omega) # examine the data frame
 ```
@@ -72,7 +81,7 @@ We can perform different types of analyses, and check whether they all lead to t
 
 We calculate summary statistics on salary by gender. Also, we create and print a dataframe where, for each gender, you show the mean, SD, sample size, the t-critical, the SE, the margin of error, and the low/high endpoints of a 95% condifence interval
 
-```{r, confint_single_variable}
+```{r, confint_single_variable, class.source="watch-out", class.output="watch-out"}
 # Summary Statistics of salary by gender
 summary_sal_stats_omega <- mosaic::favstats (salary ~ gender, data=omega)
 summary_sal_stats_omega
@@ -99,13 +108,13 @@ The mean salaries for men and women at Omega do not have overlapping confidence 
 
 We can also run a hypothesis testing, assuming as a null hypothesis that the mean difference in salaries is zero, or that, on average, men and women make the same amount of money. You should tun your hypothesis testing using `t.test()` and with the simulation method from the `infer` package.
 
-```{r, hypothesis_testing}
+```{r, hypothesis_testing, class.source="watch-out", class.output="watch-out"}
 # hypothesis testing using t.test() 
 t.test(salary ~ gender, data = omega)
 ```
 
 
-```{r}
+```{r, class.source="watch-out", class.output="watch-out"}
 # hypothesis testing using infer package
 set.seed(1)
 omega_infer_test <- omega %>%
@@ -129,7 +138,7 @@ observation_difference <- omega %>%
 observation_difference  
 ```
 
-```{r}
+```{r, class.source="watch-out", class.output="watch-out"}
 # Get p values based on test from infer package
 omega_infer_test %>% get_p_value(obs_stat = observation_difference, direction = "two-sided")
 
@@ -148,7 +157,7 @@ Our test using the "infer" package confirms the results from the t test and earl
 
 At the board meeting, someone raised the issue that there was indeed a substantial difference between male and female salaries, but that this was attributable to other reasons such as differences in experience. A questionnaire send out to the 50 executives in the sample reveals that the average experience of the men is approximately 21 years, whereas the women only have about 7 years experience on average (see table below).
 
-```{r, experience_stats}
+```{r, experience_stats, class.source="watch-out", class.output="watch-out"}
 # Summary Statistics of salary by gender
 summary_exp_stats_omega <- mosaic::favstats (experience ~ gender, data=omega)
 summary_exp_stats_omega
@@ -159,7 +168,7 @@ No, we would need to perform hypothesis tests at a specified level of significan
 We perform similar analyses as in the previous section.
 
 1) Confidence Intervals
-```{r, confint_single_variables}
+```{r, confint_single_variables, class.source="watch-out", class.output="watch-out"}
 # Dataframe with two rows (male-female) and having as columns gender, mean, SD, sample size, 
 # the t-critical value, the standard error, the margin of error, 
 # and the low/high endpoints of a 95% condifence interval
@@ -176,12 +185,12 @@ summary_exp_stats_omega <- summary_exp_stats_omega %>%
 summary_exp_stats_omega  
 ```
 2) t.test()
-```{r, hypothesis_test}
+```{r, hypothesis_test, class.source="watch-out", class.output="watch-out"}
 # hypothesis testing using t.test() 
 t.test(experience ~ gender, data = omega)
 ```
 3) Infer test
-```{r}
+```{r, class.source="watch-out", class.output="watch-out"}
 # hypothesis testing using infer package
 set.seed(1)
 omega_infer_exp_test <- omega %>%
@@ -204,7 +213,7 @@ observation_difference_exp <- omega %>%
 
 observation_difference_exp  
 ```
-```{r}
+```{r, class.source="watch-out", class.output="watch-out"}
 # Get p values based on test from infer package
 omega_infer_exp_test %>% get_p_value(obs_stat = observation_difference_exp, direction = "two-sided")
 
@@ -223,7 +232,7 @@ Someone at the meeting argues that clearly, a more thorough analysis of the rela
 We analyse the relationship between salary and experience and draw a scatterplot to visually inspect the data.
 
 
-```{r, salary_exp_scatter}
+```{r, salary_exp_scatter, class.source="watch-out", class.output="watch-out"}
 
 ggplot(omega, aes(x=experience, y= salary))+
   geom_point(size=2.5)+
@@ -243,7 +252,7 @@ ggplot(omega, aes(x=experience, y= salary))+
 ## Check correlations between the data
 We use `GGally:ggpairs()` to create a scatterplot and correlation matrix. Essentially, we change the order our variables will appear in and have the dependent variable (Y), salary, as last in our list. We then pipe the dataframe to `ggpairs()` with `aes` arguments to colour by `gender` and make ths plots somewhat transparent (`alpha  = 0.3`).
 
-```{r, ggpairs}
+```{r, ggpairs, class.source="watch-out", class.output="watch-out"}
 omega %>% 
   select(gender, experience, salary) %>% #order variables they will appear in ggpairs()
   ggpairs(aes(colour=gender, alpha = 0.3))+
